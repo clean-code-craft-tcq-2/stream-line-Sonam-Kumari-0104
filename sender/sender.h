@@ -1,6 +1,8 @@
+#define NOOFSAMPLES 50;
+
 typedef struct{
-float tempearture[50];
-float SOC[50];
+float tempearture[NOOFSAMPLES];
+float SOC[NOOFSAMPLES];
 }batteryParameters;
 
 void ReadBMSParametersFromFile(float* Temp, float* SOC);
