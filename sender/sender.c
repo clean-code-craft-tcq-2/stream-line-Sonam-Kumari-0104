@@ -22,7 +22,7 @@ void printBMSParamsOnConsole(float* Temp, float* SOC, float* CR)
    
   for (int i=0; i<NOOFSAMPLES; i++)
   {
-    printf(" Temperature: %.2f deg C , State of Charge: %.2f \n",  *(Temp+i),*(SOC+i),*(CR+i));
+    printf(" Temperature: %.2f deg C , State of Charge: %.2f , Charge Rate:%.2f \n",  *(Temp+i),*(SOC+i),*(CR+i));
   }
 }
 
