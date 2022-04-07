@@ -8,7 +8,7 @@ TEST_CASE("Check whether reading and passing the data is successful")
   float Temperature[NOOFSAMPLES] = {0};
   float StateOfCharge[NOOFSAMPLES] = {0};
   float ChargeRate[NOOFSAMPLES] = {0};
-  float expectedoutput[3][3] = {{2,5,0.0}, {5,5,0.0},{10,5,0.1}};
+  float expectedoutput[3][3] = {{2,5,0.0}, {55,5,0.0},{10,5,0.1}};
   
   ReadBMSParametersFromFile(Temperature,StateOfCharge,ChargeRate);
   int j= 0, i= 0;
