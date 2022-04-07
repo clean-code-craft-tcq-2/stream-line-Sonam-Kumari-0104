@@ -19,7 +19,7 @@ void ReadBMSParametersFromFile(float* Temp, float* SOC)
 void printBMSParamsOnConsole(float* Temp, float* SOC)
 {
   char bmsParam[50];
-  for (i=0; i<NOOFSAMPLES; i++)
+  for (int i=0; i<NOOFSAMPLES; i++)
   {
     sprintf(bmsParam[50], "Temperature: %f, SOC: %f", *(Temp+i),*(SOC+i));
   }
