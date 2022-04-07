@@ -8,7 +8,7 @@ TEST_CASE("Check whether reading and passing the data is successful")
   float Temperature[NOOFSAMPLES] = {0};
   float StateOfCharge[NOOFSAMPLES] = {0};
   float ChargeRate[NOOFSAMPLES] = {0};
-  float expectedoutput[3][3] = {{2,5,0.0}, {55,67,0.2},{10,5,0.1}};
+  float expectedoutput[3][3] = {{2,5,0.0}, {45,55,0.65},{-3,45,0.36}};
   
   ReadBMSParametersFromFile(Temperature,StateOfCharge,ChargeRate);
   int j= 0, i= 0;
@@ -17,7 +17,7 @@ TEST_CASE("Check whether reading and passing the data is successful")
     REQUIRE(Temperature[j] == expectedoutput[i][0]);
     REQUIRE(StateOfCharge[j] == expectedoutput[i][1]);
     REQUIRE(ChargeRate[j] == expectedoutput[i][2]);
-    j=j+24;
+    j=j+20;
   }
  sendBMSParameters();
 }
