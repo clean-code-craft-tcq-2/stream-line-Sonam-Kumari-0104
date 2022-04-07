@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN 
 
 #include "test/catch.hpp"
-#include <sender.h>
+#include "sender/sender.h"
 
 TEST_CASE("Check whether reading and passing the data is successful") 
 {
