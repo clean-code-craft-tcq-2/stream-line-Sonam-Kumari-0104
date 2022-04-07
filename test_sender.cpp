@@ -5,11 +5,11 @@
 
 TEST_CASE("Check whether reading and passing the data is successful") 
 {
-  float Temperature[NO_OF_SAMPLES] = {0};
-  float StateOfCharge[NO_OF_SAMPLES] = {0};
-  float expectedoutput[3][3] = {{22,75}, {55,59},{89, -5}};
+  float Temperature[NOOFSAMPLES] = {0};
+  float StateOfCharge[NOOFSAMPLES] = {0};
+  float expectedoutput[3][2] = {{22,75}, {55,59},{89, -5}};
   
-  ReadBMS_DataFromFile( Temperature,StateOfCharge,ChargeRate);
+  ReadBMS_DataFromFile(Temperature,StateOfCharge);
   int j= 0, i= 0;
   for(i=0;i<3;i++)
   {
