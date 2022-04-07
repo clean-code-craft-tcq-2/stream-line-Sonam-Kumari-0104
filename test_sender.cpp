@@ -17,7 +17,7 @@ TEST_CASE("Check whether reading and passing the data is successful")
     REQUIRE(Temperature[j] == expectedoutput[i][0]);
     REQUIRE(StateOfCharge[j] == expectedoutput[i][1]);
     REQUIRE(ChargeRate[j] == expectedoutput[i][2]);
-    j=j++;
+    j++;
   }
  sendBMSParameters();
 }
