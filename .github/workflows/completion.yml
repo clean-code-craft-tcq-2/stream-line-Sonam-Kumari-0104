@@ -22,10 +22,10 @@ jobs:
       run: ./testchecker
     
     - name: build receiver
-      run: g++ -Wall -Wextra -fprofile-arcs ./receiver/receiver.c ./receiver/processingSenderData.c -o receiver 
+      run: g++ -Wall -Wextra -fprofile-arcs ./receiver/receiver.c ./receiver/processingSenderData.c -o ./receiver/receiver 
       
     - name: run receiver
-      run: ./receiver
+      run: ./receiver/receiver
     
     - name: build test
       run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage test_receiver.cpp ./receiver/processingSenderData.c -o test_receiver
