@@ -40,30 +40,32 @@ void parseSenderData (char *senderData, struct BMS *bms_param)
 	return;
 }
 
-void findMinimumOfBMSParams(struct BMS *bms_input)
+void computeMinimum (float *min, float *value)
 {
-	static int count = FIRST_DATA_SET;
-	
-	if (count == FIRST_DATA_SET)
+	if (*min > *value)
+		*min = *value;
+}
+void setMinThresholdIfFirstData (int *dataSetCount, struct BMS *bms_input)
+{
+	if (*dataSetCount == FIRST_DATA_SET)
 	{
-		count++;
+		*dataSetCount = *dataSetCount + 1;
 		bms_input->temperature.min = bms_input->temperature.value;
 		bms_input->soc.min 		   = bms_input->soc.value;
 		bms_input->chargeRate.min  = bms_input->chargeRate.value;
 		return;
 	}
+}
+
+void findMinimumOfBMSParams(struct BMS *bms_input)
+{
+	static int count = FIRST_DATA_SET;
+		
+	setMinThresholdIfFirstData(&count, bms_input);
 	
-	if (bms_input->temperature.min > bms_input->temperature.value)
-	{
-		bms_input->temperature.min = bms_input->temperature.value;
-	}
-	if (bms_input->soc.min > bms_input->soc.value)
-	{
-		bms_input->soc.min = bms_input->soc.value;
-	}
-	if (bms_input->chargeRate.min > bms_input->chargeRate.value)
-	{
-		bms_input->chargeRate.min = bms_input->chargeRate.value;
-	}
+	computeMinimum(&bms_input->temperature.min, &bms_input->temperature.value);
+	computeMinimum(&bms_input->soc.min, &bms_input->soc.value);
+	computeMinimum(&bms_input->chargeRate.min, &bms_input->chargeRate.value);
+	
 	return;
 }

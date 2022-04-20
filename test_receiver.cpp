@@ -42,7 +42,7 @@ TEST_CASE("Find Minimum value from parsed value of each parameters")
 	bms_input.chargeRate.value = actualCR[sender_index];
 	findMinimumOfBMSParams(&bms_input);
   }
-  REQUIRE(bms_input.temperature.min == expectedTempMin;
-  REQUIRE(bms_input.soc.min == expectedSOCMin;
-  REQUIRE(bms_input.chargeRate.min == expectedCRMin;
+  REQUIRE(bms_input.temperature.min == expectedTempMin);
+  REQUIRE(bms_input.soc.min == expectedSOCMin);
+  REQUIRE(bms_input.chargeRate.min == expectedCRMin);
 }
