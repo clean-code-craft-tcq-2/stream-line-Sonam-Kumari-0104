@@ -16,11 +16,23 @@ jobs:
         sudo apt-get install -y gcovr
         
     - name: build
-      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o  testchecker ./*.c* ./sender/*.c
+      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o  testchecker test_sender.cpp ./sender/*.c
       
     - name: run
       run: ./testchecker
+    
+    - name: build receiver
+      run: g++ -Wall -Wextra -fprofile-arcs ./receiver/receiver.c ./receiver/processingSenderData.c -o receiver 
       
+    - name: run receiver
+      run: ./receiver
+    
+    - name: build test
+      run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage test_receiver.cpp ./receiver/processingSenderData.c -o test_receiver
+      
+    - name: run test
+      run: ./test_receiver
+
     - name: collect coverage
       run: gcovr --gcov-exclude=".*test.*" -r . --html --html-details -o coverage.html --print-summary
 
@@ -30,6 +42,3 @@ jobs:
         name: coverage
         path: ./*.html
         retention-days: 21
-        
-    - name: all entries made
-      run: bash ./.github/workflows/check-complete.sh
