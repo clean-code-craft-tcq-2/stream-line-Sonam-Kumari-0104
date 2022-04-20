@@ -18,8 +18,8 @@ TEST_CASE("Receive the data stream from sender and validate value of each parame
   for(sender_index=0; sender_index < 3; sender_index++)
   {
 	parseSenderData (senderData[sender_index], &bms_input);
-    REQUIRE(bms_input.temperature.value[sender_index] == expectedTemp[sender_index]);
-    REQUIRE(bms_input.soc.value[sender_index] == expectedSOC[sender_index]);
-    REQUIRE(bms_input.chargeRate.value[sender_index] == expectedCR[sender_index]);
+    REQUIRE(bms_input.temperature.value == expectedTemp[sender_index]);
+    REQUIRE(bms_input.soc.value == expectedSOC[sender_index]);
+    REQUIRE(bms_input.chargeRate.value == expectedCR[sender_index]);
   }
 }
