@@ -3,6 +3,8 @@
 #include <string.h>
 #include "receiver.h"
 
+#define FIRST_DATA_SET 1
+
 float parseParamValueFromString (char *input)
 {
 	int dest_index = 0;
@@ -38,3 +40,30 @@ void parseSenderData (char *senderData, struct BMS *bms_param)
 	return;
 }
 
+void findMinimumOfBMSParams(struct BMS *bms_input)
+{
+	static int count = FIRST_DATA_SET;
+	
+	if (count == FIRST_DATA_SET)
+	{
+		count++;
+		bms_input->temperature.min = bms_input->temperature.value;
+		bms_input->soc.min 		   = bms_input->soc.value;
+		bms_input->chargeRate.min  = bms_input->chargeRate.value;
+		return;
+	}
+	
+	if (bms_input->temperature.min > bms_input->temperature.value)
+	{
+		bms_input->temperature.min = bms_input->temperature.value;
+	}
+	if (bms_input->soc.min > bms_input->soc.value)
+	{
+		bms_input->soc.min = bms_input->soc.value;
+	}
+	if (bms_input->chargeRate.min > bms_input->chargeRate.value)
+	{
+		bms_input->chargeRate.min = bms_input->chargeRate.value;
+	}
+	return;
+}

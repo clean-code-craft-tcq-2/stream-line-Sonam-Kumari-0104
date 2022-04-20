@@ -30,3 +30,4 @@ struct BMS
 
 float parseParamValueFromString (char *input);
 void parseSenderData (char *senderData, struct BMS *bms_param);
+void findMinimumOfBMSParams(struct BMS *bms_input);
