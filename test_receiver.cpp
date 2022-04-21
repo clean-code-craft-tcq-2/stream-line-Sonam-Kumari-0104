@@ -63,7 +63,7 @@ TEST_CASE("Find Simple Moving Average from parsed value of each parameters")
   float expectedCRMav = 0.5;
 
   int total_index = sizeof(actualTemp)/sizeof(actualTemp[0]);
-  for(sender_index=0; sender_index < total_index; sender_index++)
+  for(int sender_index=0; sender_index < total_index; sender_index++)
   {
 	bms_input.temperature.value = actualTemp[sender_index];
 	bms_input.soc.value = actualSOC[sender_index];
