@@ -57,7 +57,7 @@ TEST_CASE("Find Simple Moving Average from parsed value of each parameters")
   float actualTemp[] = {12.0, 5.0, 15.0, 3.0, 4.0, 7.0, 1.0, 8.0, 11.0, 10.0};
   float actualSOC[] = {5.0, 6.0, 2.0, 3.0, 1.0, 4.0, 2.0, 4.0, 8.0, 6.0};
   float actualCR[] = {0.10, 0.40, 0.20, 0.30, 0.20, 0.1, 0.4, 0.5, 0.6, 0.9};
-  static struct BMS bms_input;
+  static struct BMS bms_input = {0.0};
   float expectedTempMav = 7.4;
   float expectedSOCMav = 4.8;
   float expectedCRMav = 0.5;
@@ -70,7 +70,7 @@ TEST_CASE("Find Simple Moving Average from parsed value of each parameters")
 	bms_input.chargeRate.value = actualCR[sender_index];
 	findMovAvgOfBMSParams(&bms_input);
   }
-  REQUIRE(bms_input.temperature.temp_stat.min == expectedTempMin);
-  REQUIRE(bms_input.soc.soc_stat.min == expectedSOCMin);
-  REQUIRE(bms_input.chargeRate.CR_stat.min == expectedCRMin);
+  REQUIRE(bms_input.temperature.temp_stat.min == expectedTempMav);
+  REQUIRE(bms_input.soc.soc_stat.min == expectedSOCMav);
+  REQUIRE(bms_input.chargeRate.CR_stat.min == expectedCRMav);
 }
