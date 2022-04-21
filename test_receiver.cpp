@@ -24,7 +24,7 @@ TEST_CASE("Receive the data stream from sender and validate parsed value of each
   }
 }
 
-TEST_CASE("Find Minimum value from parsed value of each parameters") 
+TEST_CASE("Find Minimum and Maximum value from parsed value of each parameters") 
 {
   struct BMS bms_input;
   int sender_index;
@@ -34,15 +34,20 @@ TEST_CASE("Find Minimum value from parsed value of each parameters")
   float expectedTempMin = 5.0;
   float expectedSOCMin = 2.0;
   float expectedCRMin = 0.10;
-   
+  float expectedTempMax = 15.0;
+  float expectedSOCMax = 6.0;
+  float expectedCRMax = 0.40;
   for(sender_index=0; sender_index < 3; sender_index++)
   {
 	bms_input.temperature.value = actualTemp[sender_index];
 	bms_input.soc.value = actualSOC[sender_index];
 	bms_input.chargeRate.value = actualCR[sender_index];
-	findMinimumOfBMSParams(&bms_input);
+	findMinMaxOfBMSParams(&bms_input);
   }
   REQUIRE(bms_input.temperature.min == expectedTempMin);
   REQUIRE(bms_input.soc.min == expectedSOCMin);
   REQUIRE(bms_input.chargeRate.min == expectedCRMin);
+  REQUIRE(bms_input.temperature.max == expectedTempMax);
+  REQUIRE(bms_input.soc.max == expectedSOCMax);
+  REQUIRE(bms_input.chargeRate.max == expectedCRMax);
 }

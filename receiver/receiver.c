@@ -14,9 +14,10 @@ int main ()
 	for (int dataSetIndex = 0; dataSetIndex < NO_OF_DATASETS; dataSetIndex++ )
 	{
 		parseSenderData (senderData[dataSetIndex], &bms_input);
-		findMinimumOfBMSParams(&bms_input);
+		findMinMaxOfBMSParams(&bms_input);
 	}
-	printf ("Minimum values are\n%f %f %f\n",bms_input.temperature.min, bms_input.soc.min, bms_input.chargeRate.min); 
+	printf ("Minimum values are\n%f %f %f\n",bms_input.temperature.min, bms_input.soc.min, bms_input.chargeRate.min);
+	printf ("Maximum values are\n%f %f %f\n",bms_input.temperature.max, bms_input.soc.max, bms_input.chargeRate.max);
 
 	return 0;
 	
