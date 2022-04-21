@@ -70,7 +70,7 @@ TEST_CASE("Find Simple Moving Average from parsed value of each parameters")
 	bms_input.chargeRate.value = actualCR[sender_index];
 	findMovAvgOfBMSParams(&bms_input);
   }
-  REQUIRE(bms_input.temperature.temp_stat.min == expectedTempMav);
-  REQUIRE(bms_input.soc.soc_stat.min == expectedSOCMav);
-  REQUIRE(bms_input.chargeRate.CR_stat.min == expectedCRMav);
+  REQUIRE(bms_input.temperature.temp_stat.movAvg == expectedTempMav);
+  REQUIRE(bms_input.soc.soc_stat.movAvg == expectedSOCMav);
+  REQUIRE(bms_input.chargeRate.CR_stat.movAvg == expectedCRMav);
 }
