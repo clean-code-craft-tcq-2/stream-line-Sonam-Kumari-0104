@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "receiver.h"
+#include "processingSenderData.h"
 
 #define FIRST_DATA_SET 1
 
@@ -52,12 +52,12 @@ void setThresholdIfFirstData (int *dataSetCount, struct BMS *bms_input)
 	if (*dataSetCount == FIRST_DATA_SET)
 	{
 		*dataSetCount = *dataSetCount + 1;
-		bms_input->temperature.min = bms_input->temperature.value;
-		bms_input->soc.min 		   = bms_input->soc.value;
-		bms_input->chargeRate.min  = bms_input->chargeRate.value;
-		bms_input->temperature.max = bms_input->temperature.value;
-		bms_input->soc.max 		   = bms_input->soc.value;
-		bms_input->chargeRate.max  = bms_input->chargeRate.value;
+		bms_input->temperature.temp_stat.min = bms_input->temperature.value;
+		bms_input->soc.soc_stat.min 		 = bms_input->soc.value;
+		bms_input->chargeRate.CR_stat.min  	 = bms_input->chargeRate.value;
+		bms_input->temperature.temp_stat.max = bms_input->temperature.value;
+		bms_input->soc.soc_stat.max 		 = bms_input->soc.value;
+		bms_input->chargeRate.CR_stat.max  	 = bms_input->chargeRate.value;
 		return;
 	}
 }
@@ -68,9 +68,33 @@ void findMinMaxOfBMSParams(struct BMS *bms_input)
 		
 	setThresholdIfFirstData(&count, bms_input);
 	
-	computeMinMax(&bms_input->temperature.min, &bms_input->temperature.max, &bms_input->temperature.value);
-	computeMinMax(&bms_input->soc.min, &bms_input->soc.max, &bms_input->soc.value);
-	computeMinMax(&bms_input->chargeRate.min, &bms_input->chargeRate.max, &bms_input->chargeRate.value);
+	computeMinMax(&bms_input->temperature.temp_stat.min, &bms_input->temperature.temp_stat.max, &bms_input->temperature.value);
+	computeMinMax(&bms_input->soc.soc_stat.min, &bms_input->soc.soc_stat.max, &bms_input->soc.value);
+	computeMinMax(&bms_input->chargeRate.CR_stat.min, &bms_input->chargeRate.CR_stat.max, &bms_input->chargeRate.value);
 	
 	return;
+}
+
+float computeMovAvg (float *sum, float *movAvgArray, float value)
+{
+	float result = 0.0;
+	*sum = (*sum) - (*movAvgArray) + value;
+	*movAvgArray = value;
+	result = (*sum / MOV_AVG_TOTAL);
+	return result;
+	
+}
+
+void findMovAvgOfBMSParams (struct BMS *bms_input)
+{
+	static int pos = 0;
+	
+	bms_input->temperature.temp_stat.movAvg = computeMovAvg(&bms_input->temperature.temp_stat.sum, &bms_input->temperature.temp_stat.movAvgArray[pos], 
+															bms_input->temperature.value);
+	bms_input->soc.soc_stat.movAvg = computeMovAvg(&bms_input->soc.soc_stat.sum, &bms_input->soc.soc_stat.movAvgArray[pos], bms_input->soc.value);
+	bms_input->chargeRate.CR_stat.movAvg = computeMovAvg(&bms_input->chargeRate.CR_stat.sum, &bms_input->chargeRate.CR_stat.movAvgArray[pos], 
+														   bms_input->chargeRate.value);
+	pos++;
+	if (pos == MOV_AVG_TOTAL)
+		pos = 0;
 }

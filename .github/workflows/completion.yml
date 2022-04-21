@@ -30,6 +30,9 @@ jobs:
     - name: run receiver
       run: ./receiver/receiver
     
+    - name: clean
+      run: rm -rf *.gcda
+      
     - name: build test
       run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage test_receiver.cpp ./receiver/processingSenderData.c -o test_receiver
       
