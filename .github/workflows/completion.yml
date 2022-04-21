@@ -14,7 +14,10 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y gcovr
-        
+    
+    - name: clean
+      run: rm -rf *.gcda test_receiver ./receiver/receiver
+      
     - name: build
       run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o  testchecker test_sender.cpp ./sender/*.c
       
