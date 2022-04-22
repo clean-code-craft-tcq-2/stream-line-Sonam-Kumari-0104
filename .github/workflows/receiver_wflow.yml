@@ -1,4 +1,4 @@
-name: Check Completeness
+name: Receiver Production code
 
 on: [push, pull_request]
 

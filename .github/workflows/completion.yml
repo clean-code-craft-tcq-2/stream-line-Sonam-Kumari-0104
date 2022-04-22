@@ -15,13 +15,13 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y gcovr
       
-    - name: build
+    - name: build sender
       run: g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o  testchecker test_sender.cpp ./sender/*.c
     
     - name: build receiver
       run: g++ -Wall -Wextra ./receiver/receiver.c ./receiver/processingSenderData.c -o ./receiver/receiver 
       
-    - name: run receiver
+    - name: run Integration
       run:  ./testchecker | ./receiver/receiver
 
     - name: collect coverage
