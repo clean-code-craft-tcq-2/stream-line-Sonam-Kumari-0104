@@ -1,4 +1,4 @@
-name: Sender-Receiver
+name: Deployment
 
 on: [push, pull_request]
 
