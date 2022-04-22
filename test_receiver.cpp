@@ -57,7 +57,9 @@ TEST_CASE("Find Simple Moving Average from parsed value of each parameters")
   float actualTemp[] = {12.0, 5.0, 15.0, 3.0, 4.0, 7.0, 1.0, 8.0, 11.0, 10.0};
   float actualSOC[] = {5.0, 6.0, 2.0, 3.0, 1.0, 4.0, 2.0, 4.0, 8.0, 6.0};
   float actualCR[] = {0.10, 0.40, 0.20, 0.30, 0.20, 0.1, 0.4, 0.5, 0.6, 0.9};
-  static struct BMS bms_input = {0.0};
+  struct BMS bms_input = {.temperature = {0.0, .temp_stat = {0.0, 0.0, 0.0, 0.0, 0.0}}, 
+						  .soc = {0.0, .soc_stat = {0.0, 0.0, 0.0, 0.0, 0.0}}, 
+						  .chargeRate = {0.0, .CR_stat = {0.0, 0.0, 0.0, 0.0, 0.0}}};
   float expectedTempMav = 7.4;
   float expectedSOCMav = 4.8;
   float expectedCRMav = 0.5;

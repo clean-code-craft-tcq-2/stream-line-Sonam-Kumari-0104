@@ -1,7 +1,7 @@
 #pragma once
 
 #define MOV_AVG_TOTAL 5
-struct stat
+struct stats
 {
 	float min;
 	float max;
@@ -13,19 +13,19 @@ struct stat
 struct bms_temp
 {
 	float value;
-	struct stat temp_stat;
+	struct stats temp_stat;
 };
 
 struct bms_soc
 {
 	float value;
-	struct stat soc_stat;
+	struct stats soc_stat;
 };
 
 struct bms_chargeRate
 {
 	float value;
-	struct stat CR_stat;
+	struct stats CR_stat;
 };
 
 struct BMS
