@@ -1,0 +1,20 @@
+name: Sender-Receiver
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: build sender
+      run: g++ -Wall -Wextra -o  testchecker test_sender.cpp ./sender/*.c
+    
+    - name: build receiver
+      run: g++ -Wall -Wextra ./receiver/receiver.c ./receiver/processingSenderData.c -o ./receiver/receiver 
+      
+    - name: run Sender-Receiver
+      run:  ./testchecker | ./receiver/receiver
