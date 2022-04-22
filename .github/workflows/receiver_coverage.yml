@@ -1,4 +1,4 @@
-name: Code Coverage
+name: Receiver Coverage
 
 on: [push, pull_request]
 
