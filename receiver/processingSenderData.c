@@ -4,13 +4,21 @@
 #include "processingSenderData.h"
 
 #define FIRST_DATA_SET 1
+bool isNumerical (char input)
+{
+	return (input >= '0' && input <= '9') ? 1 : 0;
+}
 
+bool isDotOrMinus (char input)
+{
+	return (input == '.' || input == '-') ? 1 : 0;
+}
 float parseParamValueFromString (char *input)
 {
 	int data_index = 0;
 	char parsed_value [10];
 	
-	while((input [data_index] >= '0' && input [data_index] <= '9') || input [data_index] == '.' || input [data_index] == '-')
+	while(isNumerical(input [data_index]) || isDotOrMinus(input [data_index]))
 	{
 		parsed_value [data_index] = input [data_index];
 		data_index++;
